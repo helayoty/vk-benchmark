@@ -19,9 +19,7 @@ RUN go mod tidy
 RUN make
 
 ###### Start a new stage from scratch #######
-FROM ubuntu:latest
-
-WORKDIR /
+FROM gcr.io/distroless/static
 
 COPY --from=builder /app/_output/bin/vk-benchmark .
 

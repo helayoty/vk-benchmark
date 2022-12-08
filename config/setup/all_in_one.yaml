@@ -199,6 +199,6 @@ spec:
       containers:
         - command:
             - /vk-benchmark
-          image: guofei.azurecr.io/vk-benchmark:0.0.1
+          image: helayoty/vk-benchmark:0.0.1
           imagePullPolicy: Always
           name: vc-bench
