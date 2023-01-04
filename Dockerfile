@@ -1,4 +1,5 @@
-FROM --platform=${TARGETPLATFORM:-linux/amd64} golang:1.18 as builder
+# Start from latest golang base image
+FROM golang:latest as builder
 
 # Set the current directory inside the container
 WORKDIR /app
@@ -15,15 +16,14 @@ COPY cmd/ cmd/
 RUN go mod tidy
 
 # Build the binaries from the source
-RUN GOARCH=${TARGETARCH} make
+RUN make
 
 ###### Start a new stage from scratch #######
-FROM --platform=${TARGETPLATFORM:-linux/amd64} gcr.io/distroless/static:nonroot
+FROM ubuntu:latest
 
 WORKDIR /
-COPY --from=builder /app/bin/vk-benchmark .
+
+COPY --from=builder /app/_output/bin/vk-benchmark .
 
 # Expose port 8080 to the outside container
 EXPOSE 8082
-
-ENTRYPOINT ["/bin/vk-benchmark"]
