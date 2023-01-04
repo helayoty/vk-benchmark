@@ -191,7 +191,6 @@ spec:
       app: vk-bench
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: vk-bench
     spec:
