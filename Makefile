@@ -38,7 +38,7 @@ BUILDX_BUILDER_NAME ?= img-builder
 QEMU_VERSION ?= 5.2.0-2
 
 build-image:
-	docker buildx build --platform linux/amd64 ${DOCKER_REG}/vk-benchmark:${TAG} .
+	docker buildx build --platform linux/amd64 -t ${DOCKER_REG}/vk-benchmark:${TAG} --push .
 
 push: build-image
 	docker push ${DOCKER_REG}/vk-benchmark:${TAG}
