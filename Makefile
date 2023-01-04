@@ -37,19 +37,8 @@ OUTPUT_TYPE ?= type=registry
 BUILDX_BUILDER_NAME ?= img-builder
 QEMU_VERSION ?= 5.2.0-2
 
-.PHONY: docker-buildx-builder
-docker-buildx-builder:
-	@if ! docker buildx ls | grep $(BUILDX_BUILDER_NAME); then \
-		docker run --rm --privileged multiarch/qemu-user-static:$(QEMU_VERSION) --reset -p yes; \
-		docker buildx create --name $(BUILDX_BUILDER_NAME) --use; \
-		docker buildx inspect $(BUILDX_BUILDER_NAME) --bootstrap; \
-	fi
+build-image:
+	docker buildx build --platform linux/amd64 ${DOCKER_REG}/vk-benchmark:${TAG} .
 
-.PHONY: build-image
-build-image: docker-buildx-builder
-	docker buildx build \
-		--file Dockerfile \
-		--output=$(OUTPUT_TYPE) \
-		--platform="linux/amd64" \
-		--pull \
-		--tag ${DOCKER_REG}/vk-benchmark:${TAG} .
+push: build-image
+	docker push ${DOCKER_REG}/vk-benchmark:${TAG}
