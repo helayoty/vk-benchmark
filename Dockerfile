@@ -21,7 +21,7 @@ RUN GOARCH=${TARGETARCH} make
 FROM --platform=${TARGETPLATFORM:-linux/amd64} gcr.io/distroless/static:nonroot
 
 WORKDIR /
-COPY --from=builder /app/_output/bin/vk-benchmark .
+COPY --from=builder /app/bin/vk-benchmark .
 
 # Expose port 8080 to the outside container
 EXPOSE 8082
