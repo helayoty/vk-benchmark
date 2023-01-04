@@ -28,7 +28,7 @@ func NewBenchmarkCommand(stopChan <-chan struct{}) *cobra.Command {
 	}
 
 	cmd := &cobra.Command{
-		Use:  "vk-bench",
+		Use:  "vk-benchmark",
 		Long: `The vk-bench is a simple benchmark that tests Azure AKS + ACI integration`,
 		Run: func(cmd *cobra.Command, args []string) {
 			var err error

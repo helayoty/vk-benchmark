@@ -33,7 +33,7 @@ type BenchmarkOptions struct {
 func NewBenchmarkOptions() (*BenchmarkOptions, error) {
 	return &BenchmarkOptions{
 		ClientConnection: componentbaseconfig.ClientConnectionConfiguration{},
-		Name:             "vk-bench",
+		Name:             "vk-benchmark",
 		Address:          "",
 		Port:             "80",
 		CertFile:         "",
@@ -69,14 +69,14 @@ func (o *BenchmarkOptions) Config() (*benchconfig.Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	clusterClient, err := clientset.NewForConfig(restclient.AddUserAgent(restConfig, "vk-bench"))
+	clusterClient, err := clientset.NewForConfig(restclient.AddUserAgent(restConfig, "vk-benchmark"))
 	if err != nil {
 		return nil, err
 	}
 
 	// Prepare event clients.
 	eventBroadcaster := record.NewBroadcaster()
-	recorder := eventBroadcaster.NewRecorder(scheme.Scheme, corev1.EventSource{Component: "vk-bench"})
+	recorder := eventBroadcaster.NewRecorder(scheme.Scheme, corev1.EventSource{Component: "vk-benchmark"})
 
 	c.Kubeconfig = restConfig
 	c.ClusterClient = clusterClient

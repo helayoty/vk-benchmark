@@ -196,8 +196,7 @@ spec:
     spec:
       serviceAccountName: vk-bench-sa
       containers:
-        - command:
-            - /vk-benchmark
-          image: helayoty/vk-benchmark:0.0.1
-          imagePullPolicy: Always
-          name: vc-bench
+      - name: vk-bench
+        command: ["vk-benchmark"]
+        image: helayoty/vk-benchmark:0.1.0
+        imagePullPolicy: Always   
