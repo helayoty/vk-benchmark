@@ -17,8 +17,7 @@
 export GO111MODULE=on
 
 # Image URL to use all building/pushing image targets
-DOCKER_REG ?= ${or ${DOCKER_REGISTRY},"guofei.azurecr.io"}
-IMG ?= ${DOCKER_REG}/vk-benchmark-amd64 
+DOCKER_REG ?= ${or ${DOCKER_REGISTRY},"helayoty"}
 TAG ?= 0.0.1
 
 # TEST_FLAGS used as flags of go test.
@@ -32,13 +31,5 @@ all: build
 build:
 	go build -o _output/bin/vk-benchmark ./cmd/benchmark/	
 
-
-OUTPUT_TYPE ?= type=registry
-BUILDX_BUILDER_NAME ?= img-builder
-QEMU_VERSION ?= 5.2.0-2
-
 build-image:
 	docker buildx build --platform linux/amd64 -t ${DOCKER_REG}/vk-benchmark:${TAG} --push .
-
-push: build-image
-	docker push ${DOCKER_REG}/vk-benchmark:${TAG}
