@@ -21,8 +21,8 @@ RUN make
 ###### Start a new stage from scratch #######
 FROM gcr.io/distroless/static
 
+WORKDIR /
 COPY --from=builder /app/_output/bin/vk-benchmark .
 
 # Expose port 8080 to the outside container
 EXPOSE 8082
-
