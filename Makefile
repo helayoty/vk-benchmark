@@ -30,7 +30,7 @@ export KUBEBUILDER_ASSETS=/tmp/kubebuilder/bin/
 all: build
 
 build:
-	go build -o bin/vk-benchmark cmd/benchmark/	
+	go build -o bin/vk-benchmark ./cmd/benchmark/	
 
 
 OUTPUT_TYPE ?= type=registry
