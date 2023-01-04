@@ -19,7 +19,7 @@ COPY cmd/ cmd/
 RUN go mod tidy
 
 # Build the binaries from the source
-RUN make
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} GO111MODULE=on go build -o _output/bin/vk-benchmark ./cmd/benchmark/
 
 ###### Start a new stage from scratch #######
 FROM --platform=$BUILDPLATFORM ubuntu:latest
